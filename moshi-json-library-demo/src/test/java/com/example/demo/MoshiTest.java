@@ -16,6 +16,31 @@ import java.util.List;
 public class MoshiTest {
 
     @Test
+    public void testBasicUsage() {
+        Moshi moshi = new Moshi.Builder()
+                .add(Date.class, new Rfc3339DateJsonAdapter())
+                .build();
+        JsonAdapter<User> jsonAdapter = moshi.adapter(User.class);
+
+        User user = new User();
+        user.setName("Larry");
+        user.setRoles(List.of(User.Role.ADMIN, User.Role.EDITOR));
+        user.setCreatedAt(new Date());
+
+        // serialization
+        String json = jsonAdapter.toJson(user);
+        System.out.println(json);
+
+        // deserialization
+        try {
+            User userParsed = jsonAdapter.fromJson(json);
+            System.out.println(userParsed);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void testUserSerializationAndDeserialization() throws IOException {
         Moshi moshi = new Moshi.Builder()
                 .add(Date.class, new Rfc3339DateJsonAdapter())
