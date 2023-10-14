@@ -17,21 +17,25 @@ public class MoshiTest {
 
     @Test
     public void testBasicUsage() {
+        // 构造 Moshi 实例
         Moshi moshi = new Moshi.Builder()
                 .add(Date.class, new Rfc3339DateJsonAdapter())
                 .build();
+
+        // 获取 User 的 JsonAdapter
         JsonAdapter<User> jsonAdapter = moshi.adapter(User.class);
 
+        // 构造 User 对象
         User user = new User();
         user.setName("Larry");
         user.setRoles(List.of(User.Role.ADMIN, User.Role.EDITOR));
         user.setCreatedAt(new Date());
 
-        // serialization
+        // 序列化
         String json = jsonAdapter.toJson(user);
         System.out.println(json);
 
-        // deserialization
+        // 反序列化
         try {
             User userParsed = jsonAdapter.fromJson(json);
             System.out.println(userParsed);
@@ -41,47 +45,66 @@ public class MoshiTest {
     }
 
     @Test
-    public void testUserSerializationAndDeserialization() throws IOException {
+    public void testCustomTypeAdapter() {
+        // 构造 Moshi 实例
         Moshi moshi = new Moshi.Builder()
                 .add(Date.class, new Rfc3339DateJsonAdapter())
                 .add(new RoleAdapter())
                 .build();
+
+        // 获取 User 的 JsonAdapter
         JsonAdapter<User> jsonAdapter = moshi.adapter(User.class);
 
+        // 构造 User 对象
         User user = new User();
         user.setName("Larry");
-        user.setCreatedAt(new Date());
         user.setRoles(List.of(User.Role.ADMIN, User.Role.EDITOR));
+        user.setCreatedAt(new Date());
 
-        // serialization
+        // 序列化
         String json = jsonAdapter.toJson(user);
         System.out.println(json);
 
-        // deserialization
-        System.out.println(jsonAdapter.fromJson(json));
+        // 反序列化
+        try {
+            User userParsed = jsonAdapter.fromJson(json);
+            System.out.println(userParsed);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void testUserListSerializationAndDeserialization() throws IOException {
+    public void testJSONArrayParsing() {
+        // 新建一个类型
         Type type = Types.newParameterizedType(List.class, User.class);
 
+        // 构造 Moshi 实例
         Moshi moshi = new Moshi.Builder()
                 .add(Date.class, new Rfc3339DateJsonAdapter())
                 .add(new RoleAdapter())
                 .build();
+
+        // 获取 User 的 JsonAdapter
         JsonAdapter<List<User>> jsonAdapter = moshi.adapter(type);
 
+        // 构造 User 对象
         User user = new User();
         user.setName("Larry");
         user.setCreatedAt(new Date());
         user.setRoles(List.of(User.Role.ADMIN, User.Role.EDITOR));
 
-        // serialization
+        // 序列化
         String json = jsonAdapter.toJson(List.of(user));
         System.out.println(json);
 
-        // deserialization
-        System.out.println(jsonAdapter.fromJson(json));
+        // 反序列化
+        try {
+            List<User> usersParsed = jsonAdapter.fromJson(json);
+            System.out.println(usersParsed);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
