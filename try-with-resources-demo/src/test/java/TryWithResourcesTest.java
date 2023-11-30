@@ -58,4 +58,22 @@ public class TryWithResourcesTest {
         }
     }
 
+    static class MyResource implements AutoCloseable {
+        @Override
+        public void close() {
+            System.out.println("my resource closed!");
+        }
+
+        public void doSomething() {
+            System.out.println("do something");
+        }
+    }
+
+    @Test
+    public void testJava7CustomResourceUsage() {
+        try (MyResource myResource = new MyResource()) {
+            myResource.doSomething();
+        }
+    }
+
 }
