@@ -15,7 +15,7 @@ public class GitHubBranchAPITest {
         baseURI = "https://api.github.com/repos/olzhy/java-exercises";
 
         given().accept(ContentType.JSON)
-                .header("Authorization", "Bearer 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")
+                .header("Authorization", "Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
                 .header("X-GitHub-Api-Version", "2022-11-28")
                 .queryParam("page", 1)
                 .queryParam("per_page", 10)
