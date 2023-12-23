@@ -1,17 +1,19 @@
 package com.example.tests;
 
+import com.example.tests.model.CommitEntry;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static io.restassured.path.json.JsonPath.from;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.*;
 
 public class GitHubCommitAPITest {
 
@@ -96,6 +98,28 @@ public class GitHubCommitAPITest {
         // assertions
         assertThat(statusCode, equalTo(200));
         assertThat(commitMessage, equalTo("rest assured demo"));
+    }
+
+    @Test
+    public void deserializeCommits() {
+        baseURI = "https://api.github.com/repos/olzhy/java-exercises";
+
+        // deserialization with generics
+        List<CommitEntry> commits = given().accept(ContentType.JSON)
+                .header("Authorization", "Bearer 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")
+                .header("X-GitHub-Api-Version", "2022-11-28")
+                .queryParam("page", 1)
+                .queryParam("per_page", 10)
+                .when()
+                .get("/commits")
+                .then()
+                .statusCode(200)
+                .extract()
+                .as(new TypeRef<>() {});
+
+        // assertions
+        assertThat(commits, hasSize(10));
+        assertThat(commits.get(0).getCommit().getMessage(), equalTo("rest assured demo"));
     }
 
 }
