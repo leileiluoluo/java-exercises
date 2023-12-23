@@ -3,7 +3,7 @@ package com.example.tests.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CommitEntry {
+public class CommitEntity {
 
     private Commit commit;
 

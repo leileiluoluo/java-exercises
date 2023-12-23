@@ -1,6 +1,6 @@
 package com.example.tests;
 
-import com.example.tests.model.CommitEntry;
+import com.example.tests.model.CommitEntity;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -104,7 +104,7 @@ public class GitHubCommitAPITest {
         baseURI = "https://api.github.com/repos/olzhy/java-exercises";
 
         // deserialization with generics
-        List<CommitEntry> commits = given().accept(ContentType.JSON)
+        List<CommitEntity> commits = given().accept(ContentType.JSON)
                 .header("Authorization", "Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
                 .header("X-GitHub-Api-Version", "2022-11-28")
                 .queryParam("page", 1)
