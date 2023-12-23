@@ -105,7 +105,7 @@ public class GitHubCommitAPITest {
 
         // deserialization with generics
         List<CommitEntry> commits = given().accept(ContentType.JSON)
-                .header("Authorization", "Bearer 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")
+                .header("Authorization", "Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
                 .header("X-GitHub-Api-Version", "2022-11-28")
                 .queryParam("page", 1)
                 .queryParam("per_page", 10)
