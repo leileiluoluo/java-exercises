@@ -6,8 +6,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.baseURI;
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static io.restassured.path.json.JsonPath.from;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -97,6 +96,41 @@ public class GitHubBranchAPITest {
         // assertions
         assertThat(branchEntity.getLinks().getHtml(), equalTo("https://github.com/olzhy/java-exercises/tree/main"));
         assertThat(branchEntity.getProtection().getEnabled(), equalTo(false));
+    }
+
+    @Test
+    public void getBranchWithLog() {
+        baseURI = "https://api.github.com/repos/olzhy/java-exercises";
+
+        given().log().all() // Log all request details
+                .accept(ContentType.JSON)
+                .header("Authorization", "Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+                .header("X-GitHub-Api-Version", "2022-11-28")
+                .pathParam("branch", "main")
+                .when()
+                .get("/branches/{branch}")
+                .then()
+                .log().body() // Log only the response body
+                .statusCode(200)
+                .body("_links.html", equalTo("https://github.com/olzhy/java-exercises/tree/main"));
+    }
+
+    @Test
+    public void getBranchWithLogOnWhenValidationFails() {
+        baseURI = "https://api.github.com/repos/olzhy/java-exercises";
+
+        // Log request and response details only when validation fails
+        enableLoggingOfRequestAndResponseIfValidationFails();
+
+        given().accept(ContentType.JSON)
+                .header("Authorization", "Bearer ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+                .header("X-GitHub-Api-Version", "2022-11-28")
+                .pathParam("branch", "main")
+                .when()
+                .get("/branches/{branch}")
+                .then()
+                .statusCode(200)
+                .body("_links.html", equalTo("https://github.com/olzhy/java-exercises/tree/main"));
     }
 
 }
