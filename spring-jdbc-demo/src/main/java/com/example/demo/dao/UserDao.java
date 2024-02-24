@@ -18,6 +18,10 @@ public interface UserDao {
 
     void update(User user);
 
+    int[] batchUpdate(List<User> users);
+
+    int[] batchUpdateUsingNamedParameters(List<User> users);
+
     void deleteById(Integer id);
 
 }
