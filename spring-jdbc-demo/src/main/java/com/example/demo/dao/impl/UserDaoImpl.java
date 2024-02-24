@@ -2,6 +2,7 @@ package com.example.demo.dao.impl;
 
 import com.example.demo.dao.UserDao;
 import com.example.demo.model.User;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,23 +11,44 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserDaoImpl implements UserDao {
 
+    @Autowired
+    private DataSource dataSource;
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     @Autowired
     private JdbcClient jdbcClient;
+
+    private SimpleJdbcInsert simpleJdbcInsert;
+    private SimpleJdbcCall simpleJdbcCall;
+
+    @PostConstruct
+    public void initialize() {
+        simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+                .withTableName("user")
+                .usingGeneratedKeyColumns("id");
+
+        simpleJdbcCall = new SimpleJdbcCall(dataSource)
+                .withProcedureName("get_user_by_id");
+    }
 
     @Override
     public Integer countAll() {
@@ -64,6 +86,21 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User getByIdUsingProcedure(Integer id) {
+        SqlParameterSource in = new MapSqlParameterSource()
+                .addValue("user_id", id);
+
+        Map<String, Object> out = simpleJdbcCall.execute(in);
+        User user = new User();
+        user.setId(id);
+        user.setName((String) out.get("user_name"));
+        user.setAge((Integer) out.get("user_age"));
+        user.setEmail((String) out.get("user_email"));
+        user.setCreatedAt((Date) out.get("user_created_at"));
+        return user;
+    }
+
+    @Override
     public Integer save(User user) {
         String sql = "insert into user(name, age, email, created_at) values(?, ?, ?, now())";
 
@@ -78,6 +115,17 @@ public class UserDaoImpl implements UserDao {
 
         Number id = keyHolder.getKey();
         assert null != id;
+        return id.intValue();
+    }
+
+    @Override
+    public Integer saveUsingSimpleInsert(User user) {
+        Map<String, Object> parameters = new HashMap<>(4);
+        parameters.put("name", user.getName());
+        parameters.put("age", user.getAge());
+        parameters.put("email", user.getEmail());
+        parameters.put("created_at", new Date());
+        Number id = simpleJdbcInsert.executeAndReturnKey(parameters);
         return id.intValue();
     }
 

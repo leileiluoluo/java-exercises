@@ -14,7 +14,11 @@ public interface UserDao {
 
     User getById(Integer id);
 
+    User getByIdUsingProcedure(Integer id);
+
     Integer save(User user);
+
+    Integer saveUsingSimpleInsert(User user);
 
     void update(User user);
 
