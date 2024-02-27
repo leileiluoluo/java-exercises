@@ -57,5 +57,4 @@ public class UserRepositoryTest {
         assertNotNull(users);
     }
 
-
 }
