@@ -11,8 +11,7 @@ import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class UserRepositoryTest {
@@ -26,6 +25,21 @@ public class UserRepositoryTest {
 
         assertNotNull(user);
         assertEquals("Larry", user.getName());
+    }
+
+    @Test
+    public void testFindAll() {
+        Pageable pageable = PageRequest.of(1, 2, Sort.by("createdAt").descending());
+        Page<User> page = userRepository.findAll(pageable);
+
+        assertEquals(1, page.getContent().size());
+    }
+
+    @Test
+    public void testExistsByNameAndEmail() {
+        boolean exists = userRepository.existsByNameAndEmail("Larry", "larry@larry.com");
+
+        assertTrue(exists);
     }
 
     @Test
@@ -43,12 +57,5 @@ public class UserRepositoryTest {
         assertNotNull(users);
     }
 
-    @Test
-    public void testFindAll() {
-        Pageable pageable = PageRequest.of(1, 2, Sort.by("createdAt").descending());
-        Page<User> page = userRepository.findAll(pageable);
-
-        assertEquals(1, page.getContent().size());
-    }
 
 }

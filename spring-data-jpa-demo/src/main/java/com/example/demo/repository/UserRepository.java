@@ -13,6 +13,8 @@ public interface UserRepository extends Repository<User, Long> {
 
     Page<User> findAll(Pageable pageable);
 
+    boolean existsByNameAndEmail(String name, String email);
+
     List<User> findByNameIgnoreCase(String name);
 
     List<User> findByNameOrderByCreatedAtDesc(String name);
