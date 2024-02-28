@@ -19,4 +19,6 @@ public interface UserRepository extends Repository<User, Long> {
 
     List<User> findByNameOrderByCreatedAtDesc(String name);
 
+    User save(User user);
+
 }
