@@ -52,10 +52,17 @@ public class UserRepositoryTest {
 
     @Test
     public void testFindByNameOrderByCreatedAtDesc() {
-        List<User> users = userRepository.findByNameOrderByCreatedAtDesc("larry");
+        List<User> users = userRepository.findByNameOrderByCreatedAtDesc("Larry");
 
         assertEquals(1, users.size());
         assertEquals("Larry", users.get(0).getName());
+    }
+
+    @Test
+    public void testFindByNameAndAge() {
+        User user = userRepository.findByNameAndAge("Larry", 18);
+
+        assertEquals("Larry", user.getName());
     }
 
 }
