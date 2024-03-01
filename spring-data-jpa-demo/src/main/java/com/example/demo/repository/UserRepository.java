@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 
@@ -35,9 +36,20 @@ public interface UserRepository extends Repository<User, Long> {
     @Query("select u from User u where u.name = ?1 and u.age = ?2")
     User findByNameAndAgeAnotherWay(String name, Integer age);
 
+    @Query(value = "select * from user where name = ?1 and age = ?2", nativeQuery = true)
+    User findByNameAndAgeWithNativeSQL(String name, Integer age);
+
     @Transactional
     @Modifying
     @Query("update User u set u.name = :name where u.id = :id")
     void updateNameById(@Param("name") String name, @Param("id") Long id);
+
+    @Transactional
+    @Modifying
+    @Query("delete from User u where u.age > :age")
+    void deleteByAgeGreaterThan(@Param("age") Integer age);
+
+    @Procedure(procedureName = "get_md5_email_by_id")
+    String getMd5EmailUsingProcedure(@Param("user_id") Long id);
 
 }

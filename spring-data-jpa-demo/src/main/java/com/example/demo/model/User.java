@@ -1,15 +1,15 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
 @Entity
+@NamedStoredProcedureQuery(name = "User.getMd5EmailById", procedureName = "get_md5_email_by_id", parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class)})
 public class User {
 
     @Id

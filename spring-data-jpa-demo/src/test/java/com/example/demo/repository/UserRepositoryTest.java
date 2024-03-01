@@ -65,4 +65,11 @@ public class UserRepositoryTest {
         assertEquals("Larry", user.getName());
     }
 
+    @Test
+    public void testFindByIdUsingProcedure() {
+        String md5Email = userRepository.getMd5EmailUsingProcedure(1L);
+
+        assertEquals("844ee4ade9b36ce52a49e9f7cf73157b", md5Email);
+    }
+
 }
