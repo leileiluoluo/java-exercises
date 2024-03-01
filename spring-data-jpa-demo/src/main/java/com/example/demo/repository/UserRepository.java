@@ -49,7 +49,8 @@ public interface UserRepository extends Repository<User, Long> {
     @Query("delete from User u where u.age > :age")
     void deleteByAgeGreaterThan(@Param("age") Integer age);
 
-    @Procedure(procedureName = "get_md5_email_by_id")
+    @Transactional
+    @Procedure(name = "User.getMd5EmailById")
     String getMd5EmailUsingProcedure(@Param("user_id") Long id);
 
 }

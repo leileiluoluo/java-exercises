@@ -8,8 +8,8 @@ import java.util.Date;
 @Data
 @Entity
 @NamedStoredProcedureQuery(name = "User.getMd5EmailById", procedureName = "get_md5_email_by_id", parameters = {
-        @StoredProcedureParameter(mode = ParameterMode.IN, type = Long.class),
-        @StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class)})
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "user_id", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "md5_email", type = String.class)})
 public class User {
 
     @Id
