@@ -1,18 +1,19 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.User;
-import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface UserRepository extends Repository<User, Long> {
+public interface UserRepository extends Repository<User, Long>, JpaSpecificationExecutor<User> {
 
     User findById(Long id);
 

@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.User;
+import jakarta.persistence.criteria.Predicate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 
@@ -70,6 +72,19 @@ public class UserRepositoryTest {
         String md5Email = userRepository.getMd5EmailUsingProcedure(1L);
 
         assertEquals("844ee4ade9b36ce52a49e9f7cf73157b", md5Email);
+    }
+
+    @Test
+    public void testFindAllBySpecification() {
+        Specification<User> spec = (root, query, criteriaBuilder) -> {
+            Predicate ageGreaterThanCondition = criteriaBuilder.greaterThan(root.get("age"), 10);
+            Predicate nameLikeCondition = criteriaBuilder.like(root.get("name"), "%La%");
+            return criteriaBuilder.and(ageGreaterThanCondition, nameLikeCondition);
+        };
+
+        List<User> users = userRepository.findAll(spec);
+        assertEquals(1, users.size());
+        assertEquals("Larry", users.get(0).getName());
     }
 
 }
