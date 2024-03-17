@@ -1,0 +1,79 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.UserDaoMapper">
+    <sql id="save_columns">
+        email,
+        name,
+        role,
+        description,
+        created_at,
+        updated_at,
+        deleted
+    </sql>
+    <sql id="select_columns">
+        id,
+        email,
+        name,
+        description,
+        created_at as createdAt,
+        updated_at as updatedAt,
+        deleted
+    </sql>
+    <select id="list" resultType="com.example.demo.model.User">
+        SELECT
+        <include refid="select_columns"/>
+        FROM user
+        WHERE deleted=false
+        ORDER BY created_at DESC
+        LIMIT #{offset}, #{rows}
+    </select>
+    <select id="count" resultType="long">
+        SELECT
+        COUNT(*)
+        FROM user
+        WHERE deleted=false
+    </select>
+    <select id="getById" resultType="com.example.demo.model.User">
+        SELECT
+        <include refid="select_columns"/>
+        FROM user
+        WHERE deleted=false
+        AND id=#{id}
+    </select>
+    <select id="existsByEmail" resultType="boolean">
+        SELECT
+        EXISTS (
+        SELECT 1
+        FROM user
+        WHERE deleted=false
+        AND email=#{email}
+        )
+    </select>
+    <insert id="save">
+        INSERT INTO user (
+        <include refid="save_columns"/>
+        ) VALUES (
+        #{email},
+        #{name},
+        #{role},
+        #{description},
+        now(),
+        now(),
+        false
+        )
+    </insert>
+    <update id="update">
+        UPDATE user
+        SET
+        email=#{email},
+        name=#{name},
+        role=#{role},
+        description=#{description},
+        updated_at=now()
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteById">
+        DELETE
+        FROM user
+        WHERE id=#{id}
+    </delete>
+</mapper>
