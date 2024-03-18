@@ -12,9 +12,13 @@ public interface UserDaoMapper {
 
     User getById(Long id);
 
-    User existsByEmail(String email);
+    boolean existsByEmail(String email);
 
-    Long save(User user);
+    List<User> searchByName(String name);
+
+    void save(User user);
+
+    void batchSave(List<User> users);
 
     void update(User user);
 

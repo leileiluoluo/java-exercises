@@ -5,3 +5,6 @@ spring:
     password: root
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
+logging:
+  level:
+    com.example.demo.dao.UserDaoMapper: DEBUG

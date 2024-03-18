@@ -1,6 +1,8 @@
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.UserDaoMapper">
-    <sql id="save_columns">
+    <sql id="insert_columns">
         email,
         name,
         role,
@@ -13,6 +15,7 @@
         id,
         email,
         name,
+        role,
         description,
         created_at as createdAt,
         updated_at as updatedAt,
@@ -22,7 +25,7 @@
         SELECT
         <include refid="select_columns"/>
         FROM user
-        WHERE deleted=false
+        WHERE deleted = false
         ORDER BY created_at DESC
         LIMIT #{offset}, #{rows}
     </select>
@@ -30,27 +33,36 @@
         SELECT
         COUNT(*)
         FROM user
-        WHERE deleted=false
+        WHERE deleted = false
     </select>
     <select id="getById" resultType="com.example.demo.model.User">
         SELECT
         <include refid="select_columns"/>
         FROM user
-        WHERE deleted=false
-        AND id=#{id}
+        WHERE deleted = false
+        AND id = #{id}
     </select>
     <select id="existsByEmail" resultType="boolean">
         SELECT
         EXISTS (
         SELECT 1
         FROM user
-        WHERE deleted=false
-        AND email=#{email}
+        WHERE deleted = false
+        AND email = #{email}
         )
     </select>
-    <insert id="save">
+    <select id="searchByName" resultType="com.example.demo.model.User">
+        SELECT
+        <include refid="select_columns"/>
+        FROM user
+        WHERE deleted = false
+        <if test="name != null and name != ''">
+            AND name LIKE CONCAT('%', #{name}, '%')
+        </if>
+    </select>
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user (
-        <include refid="save_columns"/>
+        <include refid="insert_columns"/>
         ) VALUES (
         #{email},
         #{name},
@@ -61,19 +73,27 @@
         false
         )
     </insert>
+    <insert id="batchSave" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (
+        <include refid="insert_columns"/>
+        ) VALUES
+        <foreach item="item" collection="list" separator=",">
+            (#{item.email}, #{item.name}, #{item.role}, #{item.description}, now(), now(), false)
+        </foreach>
+    </insert>
     <update id="update">
         UPDATE user
         SET
-        email=#{email},
-        name=#{name},
-        role=#{role},
-        description=#{description},
-        updated_at=now()
-        WHERE id=#{id}
+        email = #{email},
+        name = #{name},
+        role = #{role},
+        description = #{description},
+        updated_at = now()
+        WHERE id = #{id}
     </update>
     <delete id="deleteById">
         DELETE
         FROM user
-        WHERE id=#{id}
+        WHERE id = #{id}
     </delete>
 </mapper>
