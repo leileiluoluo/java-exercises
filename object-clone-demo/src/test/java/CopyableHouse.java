@@ -37,16 +37,16 @@ public class CopyableHouse {
         house2.size = 99;
         house2.refrigerator.name = "Jacky's Refrigerator";
 
-        System.out.println(house1); // AnotherHouse@75828a0f
+        System.out.println(house1); // CopyableHouse@75828a0f
         System.out.println(house1.name); // Larry's House
         System.out.println(house1.size); // 100
-        System.out.println(house1.refrigerator); // AnotherHouse$Refrigerator@3abfe836
+        System.out.println(house1.refrigerator); // CopyableHouse$Refrigerator@3abfe836
         System.out.println(house1.refrigerator.name); // Larry's Refrigerator
 
-        System.out.println(house2); // AnotherHouse@2ff5659e
+        System.out.println(house2); // CopyableHouse@2ff5659e
         System.out.println(house2.name); // Jacky's House
         System.out.println(house2.size); // 99
-        System.out.println(house2.refrigerator); // AnotherHouse$Refrigerator@77afea7d
+        System.out.println(house2.refrigerator); // CopyableHouse$Refrigerator@77afea7d
         System.out.println(house2.refrigerator.name); // Jacky's Refrigerator
     }
 }
