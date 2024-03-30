@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.dao;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
