@@ -1,4 +1,4 @@
-public class Telephone {
+public class Telephone implements Comparable<Telephone> {
 
     private final int countryCode;
     private final String areaCode;
@@ -10,17 +10,17 @@ public class Telephone {
         this.number = number;
     }
 
-//    @Override
-//    public int compareTo(Telephone o) {
-//        int result = Integer.compare(countryCode, o.countryCode);
-//        if (0 == result) {
-//            result = String.CASE_INSENSITIVE_ORDER.compare(areaCode, o.areaCode);
-//            if (0 == result) {
-//                result = Integer.compare(number, o.number);
-//            }
-//        }
-//        return result;
-//    }
+    @Override
+    public int compareTo(Telephone o) {
+        int result = Integer.compare(countryCode, o.countryCode);
+        if (0 == result) {
+            result = String.CASE_INSENSITIVE_ORDER.compare(areaCode, o.areaCode);
+            if (0 == result) {
+                result = Integer.compare(number, o.number);
+            }
+        }
+        return result;
+    }
 
     @Override
     public String toString() {

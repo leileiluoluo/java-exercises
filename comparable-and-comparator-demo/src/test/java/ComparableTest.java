@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class ComparableTest {
 
     @Test
-    public void testArraysSort() {
+    public void testArraySort() {
         Telephone[] telephones = new Telephone[]{
                 new Telephone(86, "010", 89150405),
                 new Telephone(86, "010", 56249829),
@@ -13,8 +13,10 @@ public class ComparableTest {
                 new Telephone(86, "0411", 39966686)
         };
 
+        // sort arrays
         Arrays.sort(telephones);
 
+        // print
         Arrays.stream(telephones).forEach(System.out::println);
     }
 
