@@ -22,6 +22,18 @@ public class Telephone implements Comparable<Telephone> {
         return result;
     }
 
+    public int getCountryCode() {
+        return countryCode;
+    }
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
     @Override
     public String toString() {
         return "PhoneNumber{" +
