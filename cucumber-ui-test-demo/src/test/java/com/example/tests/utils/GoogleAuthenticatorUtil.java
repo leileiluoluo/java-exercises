@@ -1,0 +1,13 @@
+package com.example.tests.utils;
+
+import com.warrenstrange.googleauth.GoogleAuthenticator;
+
+public class GoogleAuthenticatorUtil {
+
+    private static final GoogleAuthenticator authenticator = new GoogleAuthenticator();
+
+    public static int getTotpPassword(String secret) {
+        return authenticator.getTotpPassword(secret, System.currentTimeMillis());
+    }
+
+}

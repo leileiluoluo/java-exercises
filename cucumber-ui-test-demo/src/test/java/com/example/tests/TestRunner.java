@@ -1,7 +1,9 @@
 package com.example.tests;
 
+import com.example.tests.utils.WebDriverFactory;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
@@ -10,4 +12,10 @@ import org.junit.runner.RunWith;
         plugin = {"json:target/cucumber.json"}
 )
 public class TestRunner {
+
+    @AfterAll
+    public void closeWebDriver() {
+        WebDriverFactory.closeWebDriver();
+    }
+
 }
