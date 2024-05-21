@@ -42,6 +42,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- cucumber reporting -->
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>5.8.0</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- junit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
