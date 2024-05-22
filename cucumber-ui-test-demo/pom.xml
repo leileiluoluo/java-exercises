@@ -31,6 +31,7 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- google authenticator -->
@@ -38,6 +39,7 @@
             <groupId>com.warrenstrange</groupId>
             <artifactId>googleauth</artifactId>
             <version>1.5.0</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- junit -->
