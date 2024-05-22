@@ -6,8 +6,8 @@ public class GoogleAuthenticatorUtil {
 
     private static final GoogleAuthenticator authenticator = new GoogleAuthenticator();
 
-    public static int getTotpPassword(String secret) {
-        return authenticator.getTotpPassword(secret, System.currentTimeMillis());
+    public static int getTotpCode(String secret) {
+        return authenticator.getTotpPassword(secret);
     }
 
 }
