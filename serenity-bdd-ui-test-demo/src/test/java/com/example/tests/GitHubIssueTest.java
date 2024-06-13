@@ -2,11 +2,10 @@ package com.example.tests;
 
 import com.example.tests.page.CreateIssuePage;
 import com.example.tests.page.LoginPage;
-import net.serenitybdd.annotations.Managed;
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.WebDriver;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.startsWith;
@@ -14,18 +13,22 @@ import static org.hamcrest.Matchers.startsWith;
 @ExtendWith(SerenityJUnit5Extension.class)
 public class GitHubIssueTest {
 
-    @Managed(driver = "chrome")
-    WebDriver driver;
-
-    LoginPage loginPage;
-    CreateIssuePage createIssuePage;
+    private LoginPage loginPage;
+    private CreateIssuePage createIssuePage;
 
     @Test
     public void testIssueCreation() {
+        // login
         loginPage.login();
-        createIssuePage.createIssue("haha");
 
-        assertThat(createIssuePage.getTitle(), startsWith("haha"));
+        // create issue
+        String title = "Serenity UI Test";
+        createIssuePage.createIssue(title);
+
+        // assert
+        Serenity.reportThat("Check title",
+                () -> assertThat(createIssuePage.getTitle(), startsWith(title))
+        );
     }
 
 }

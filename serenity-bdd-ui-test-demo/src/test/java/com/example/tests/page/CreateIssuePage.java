@@ -1,5 +1,6 @@
 package com.example.tests.page;
 
+import com.example.tests.util.ConfigUtil;
 import net.serenitybdd.core.pages.PageComponent;
 import org.openqa.selenium.By;
 
@@ -12,7 +13,7 @@ public class CreateIssuePage extends PageComponent {
 
     public void createIssue(String title) {
         // open issue creation URL
-        open(CREATE_ISSUE_URL);
+        openUrl(ConfigUtil.getProperty("GITHUB_REPO") + CREATE_ISSUE_URL);
 
         waitForRenderedElementsToBePresent(INPUT_TITLE_ELEM);
 
