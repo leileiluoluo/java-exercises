@@ -1,6 +1,6 @@
-package com.example.tests.page;
+package com.example.tests.pages;
 
-import com.example.tests.util.ConfigUtil;
+import com.example.tests.utils.ConfigUtil;
 import net.serenitybdd.core.pages.PageComponent;
 import org.openqa.selenium.By;
 

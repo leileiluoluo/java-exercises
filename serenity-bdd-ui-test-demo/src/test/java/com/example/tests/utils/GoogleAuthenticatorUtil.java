@@ -1,4 +1,4 @@
-package com.example.tests.util;
+package com.example.tests.utils;
 
 import com.warrenstrange.googleauth.GoogleAuthenticator;
 

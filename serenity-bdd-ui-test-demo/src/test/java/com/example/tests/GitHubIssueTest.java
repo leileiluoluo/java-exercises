@@ -1,7 +1,7 @@
 package com.example.tests;
 
-import com.example.tests.page.CreateIssuePage;
-import com.example.tests.page.LoginPage;
+import com.example.tests.pages.CreateIssuePage;
+import com.example.tests.pages.LoginPage;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.junit5.SerenityJUnit5Extension;
 import org.junit.jupiter.api.Test;
