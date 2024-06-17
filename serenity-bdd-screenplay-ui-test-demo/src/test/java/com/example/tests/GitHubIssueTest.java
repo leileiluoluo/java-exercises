@@ -1,6 +1,6 @@
 package com.example.tests;
 
-import com.example.tests.question.IssueTitle;
+import com.example.tests.questions.IssueTitle;
 import com.example.tests.tasks.CreateIssue;
 import com.example.tests.tasks.Login;
 import com.example.tests.utils.ConfigUtil;
