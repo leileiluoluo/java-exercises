@@ -26,13 +26,7 @@ public class CreateIssueAction extends UIInteractions {
         Map<String, Object> requestBody = prepareRequestBody(title);
 
         // response
-        Response response = given().contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("Authorization", "Bearer " + ConfigUtil.getProperty("GITHUB_TOKEN"))
-                .body(requestBody)
-                .post("/issues")
-                .then()
-                .extract().response();
+        Response response = given().contentType(ContentType.JSON).accept(ContentType.JSON).header("Authorization", "Bearer " + ConfigUtil.getProperty("GITHUB_TOKEN")).body(requestBody).post("/issues").then().extract().response();
 
         // extract
         this.statusCode = response.getStatusCode();
@@ -56,38 +50,3 @@ public class CreateIssueAction extends UIInteractions {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
