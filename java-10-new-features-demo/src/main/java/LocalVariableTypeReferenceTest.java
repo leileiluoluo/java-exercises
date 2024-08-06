@@ -18,7 +18,7 @@ public class LocalVariableTypeReferenceTest {
             System.out.println(i);
         }
 
-        // 在增强型 for 循环使用 var
+        // 在增强 for 循环中使用 var
         for (var str : List.of("Larry", "Jacky", "Alice")) {
             System.out.println(str);
         }
