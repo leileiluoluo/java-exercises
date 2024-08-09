@@ -22,7 +22,6 @@ public class NewHTTPClientAPITest {
 
         // 同步请求
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.statusCode());
         System.out.println(response.body());
 
         // 异步请求
