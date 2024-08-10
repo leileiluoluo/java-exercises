@@ -12,7 +12,7 @@ public class CollectionEnhancementsTest {
 
         // Java 11：调用 Collection 的 `toArray(IntFunction<T[]> generator)` 方法
         String[] names2 = List.of("Larry", "Jacky", "Alice")
-                .toArray(String[]::new);
+                .toArray(String[]::new); // 方法引用 `String[]::new` 等价于 Lambda 表达式 `(int s) -> new String[s]`
     }
 
 }
