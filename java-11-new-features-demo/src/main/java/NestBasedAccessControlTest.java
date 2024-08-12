@@ -1,6 +1,6 @@
 public class NestBasedAccessControlTest {
 
-    private final int number = 10;
+    private int number = 10;
 
     private void printOuter() {
         new Inner().printInner();
@@ -8,6 +8,7 @@ public class NestBasedAccessControlTest {
 
     private class Inner {
         private void printInner() {
+            number += 10;
             System.out.println(number);
         }
     }

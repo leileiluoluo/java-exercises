@@ -3,7 +3,7 @@ import java.lang.reflect.Method;
 
 public class NestBasedAccessControlReflectionTest {
 
-    private final int number = 10;
+    private int number = 10;
 
     private void printOuter() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Inner inner = new Inner();
@@ -13,6 +13,7 @@ public class NestBasedAccessControlReflectionTest {
 
     private class Inner {
         private void printInner() {
+            number += 10;
             System.out.println(number);
         }
     }
