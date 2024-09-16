@@ -1,0 +1,16 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/leileiluoluo/java-exercises.git
+          default-label: main
+          searchPaths: spring-cloud-config-demo/config-service/config
+eureka:
+  client:
+    server-url:
+      defaultZone: http://localhost:8761/eureka/
