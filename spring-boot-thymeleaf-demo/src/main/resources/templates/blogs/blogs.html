@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout::layout}">
+<head>
+    <title>博客列表</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="blog-list">
+        <ul>
+            <li th:each="blog : ${blogs}" th:if="${!blog.deleted}">
+                <a th:href="@{/blogs/{id}(id=${blog.id})}" th:text="${blog.name}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>博客聚合</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header layout:fragment="header">
+    <nav>
+        <a href="/">首页</a>
+        <a href="/blogs">博客列表</a>
+    </nav>
+</header>
+
+<div class="container" layout:fragment="content">
+
+</div>
+
+<footer layout:fragment="footer">
+    <p th:text="@{'© {year} 博客聚合'(year=${T(com.example.demo.util.DateUtil).getCurrentYear()})}"></p>
+</footer>
+</body>
+</html>

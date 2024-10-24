@@ -1,0 +1,112 @@
+/* 基础样式 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* 页眉样式 */
+header {
+    background: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* 导航菜单 */
+nav {
+    margin: 20px 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 内容区域 */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 博客列表 */
+.blog-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.blog-list li {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.blog-list li:last-child {
+    border-bottom: none;
+}
+
+.blog-list a {
+    text-decoration: none;
+    color: #4CAF50;
+}
+
+.blog-list a:hover {
+    text-decoration: underline;
+}
+
+/* 博客详情 */
+.blog-detail h2 {
+    margin-top: 0;
+}
+
+.blog-detail p {
+    margin: 10px 0;
+}
+
+.blog-detail .note {
+    color: red;
+    font-size: 12px;
+}
+
+/* 页脚样式 */
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #4CAF50;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* 响应式设计 */
+@media (max-width: 600px) {
+    nav {
+        display: block;
+        margin: 0;
+    }
+
+    nav a {
+        display: block;
+        margin: 5px 0;
+    }
+
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+}
