@@ -7,8 +7,10 @@ import java.util.Optional;
 
 public interface BlogService {
 
+    void addBlog(Blog blog);
+
     List<Blog> listAllBlogs();
 
-    Optional<Blog> getBlogById(Long id);
+    Optional<Blog> getBlogById(Integer id);
 
 }

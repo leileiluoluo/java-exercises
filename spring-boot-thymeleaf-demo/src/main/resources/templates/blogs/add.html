@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout::layout}">
+<head>
+    <title>提交博客</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="form">
+        <form th:action="@{/blogs}" th:object="${blog}" method="post">
+            <div>
+                <label>博客名称：</label>
+                <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" />
+            </div>
+            <div>
+                <input name="name" th:field="*{name}"/>
+            </div>
+
+            <div>
+                <label>博客描述：</label>
+                <span class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}" />
+            </div>
+            <div>
+                <textarea name="description" th:field="*{description}"/>
+            </div>
+
+            <div>
+                <label>技术博客：</label>
+            </div>
+            <div>
+                <select id="options" name="technical">
+                    <option value="false">否</option>
+                    <option value="true">是</option>
+                </select>
+            </div>
+
+            <div>
+                <button>提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

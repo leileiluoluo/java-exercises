@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Blog {
 
-    private Long id;
+    private Integer id;
     private String name;
     private String description;
     private boolean technical;
