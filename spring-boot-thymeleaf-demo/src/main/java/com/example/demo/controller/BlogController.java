@@ -57,6 +57,9 @@ public class BlogController {
     @GetMapping("/{id}")
     public String getBlogById(@PathVariable("id") Integer id, Model model) {
         Optional<Blog> optional = blogService.getBlogById(id);
+        if (optional.isEmpty()) {
+            return "error/404";
+        }
 
         model.addAttribute("blog", optional.get());
 
