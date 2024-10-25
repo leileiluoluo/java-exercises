@@ -5,7 +5,7 @@
     <title th:text="${blog.name}"></title>
 </head>
 <body>
-<div layout:fragment="content">
+<main layout:fragment="content">
     <div class="blog-detail">
         <h2 th:text="${blog.name}"></h2>
 
@@ -13,6 +13,6 @@
 
         <div class="note" th:text="${blog.technical ? '*该博客为技术博客' : '*该博客为非技术博客'}"></div>
     </div>
-</div>
+</main>
 </body>
 </html>

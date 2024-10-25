@@ -5,7 +5,7 @@
     <title>提交博客</title>
 </head>
 <body>
-<div layout:fragment="content">
+<main layout:fragment="content">
     <div class="form">
         <form th:action="@{/blogs}" th:object="${blog}" method="post">
             <div>
@@ -39,6 +39,6 @@
             </div>
         </form>
     </div>
-</div>
+</main>
 </body>
 </html>
