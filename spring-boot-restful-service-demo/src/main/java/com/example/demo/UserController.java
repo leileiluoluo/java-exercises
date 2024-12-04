@@ -1,7 +1,7 @@
-package com.example.demo.controller.controller;
+package com.example.demo;
 
-import com.example.demo.controller.model.User;
-import com.example.demo.controller.service.UserService;
+import com.example.demo.model.User;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;

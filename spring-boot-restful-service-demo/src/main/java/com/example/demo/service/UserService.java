@@ -1,6 +1,6 @@
-package com.example.demo.controller.service;
+package com.example.demo.service;
 
-import com.example.demo.controller.model.User;
+import com.example.demo.model.User;
 
 import java.util.List;
 

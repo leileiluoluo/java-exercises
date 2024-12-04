@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo;
 
 import com.example.demo.model.Blog;
 import com.example.demo.service.BlogService;
