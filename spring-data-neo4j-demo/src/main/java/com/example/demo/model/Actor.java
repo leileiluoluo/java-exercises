@@ -5,9 +5,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
-import org.springframework.data.neo4j.core.schema.Relationship;
-
-import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -22,14 +19,10 @@ public class Actor {
     private String nationality;
     private int yearOfBirth;
 
-    @Relationship(type = "ACTED_IN", direction = Relationship.Direction.OUTGOING)
-    private List<Role> rolesAndMovies;
-
-    public Actor(String name, String nationality, int yearOfBirth, List<Role> rolesAndMovies) {
+    public Actor(String name, String nationality, int yearOfBirth) {
         this.name = name;
         this.nationality = nationality;
         this.yearOfBirth = yearOfBirth;
-        this.rolesAndMovies = rolesAndMovies;
     }
 
 }

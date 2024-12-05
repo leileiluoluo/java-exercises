@@ -12,11 +12,11 @@ public class Role {
     private String name;
 
     @TargetNode
-    private Movie movie;
+    private Actor actor;
 
-    public Role(String name, Movie movie) {
+    public Role(String name, Actor actor) {
         this.name = name;
-        this.movie = movie;
+        this.actor = actor;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class Role {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", movie=" + movie +
+                ", actor=" + actor +
                 '}';
     }
 }

@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.model.Actor;
 import com.example.demo.model.Movie;
 import com.example.demo.repository.ActorRepository;
+import com.example.demo.repository.MovieRepository;
 import com.example.demo.service.ActorMovieService;
 import org.neo4j.cypherdsl.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class ActorMovieServiceImpl implements ActorMovieService {
 
     @Autowired
     private ActorRepository actorRepository;
+    @Autowired
+    private MovieRepository movieRepository;
 
     @Autowired
     private Neo4jTemplate neo4jTemplate;
