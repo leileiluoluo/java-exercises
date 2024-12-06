@@ -27,9 +27,17 @@ public class ActorMovieServiceTest {
     }
 
     @Test
-    public void testQueryByExample() {
-        List<Actor> actors = actorMovieService.queryByExample();
+    public void testFindActorsByNamePrefixWithQueryByExample() {
+        List<Actor> actors = actorMovieService.findActorsByNamePrefixWithQueryByExample("吴");
         System.out.println(actors);
+    }
+
+    @Test
+    public void testUpdateMovie() {
+        Movie movie = new Movie();
+        movie.setId(6L);
+        movie.setName("战狼 2");
+        actorMovieService.updateMovie(movie);
     }
 
 }

@@ -33,4 +33,9 @@ public class ActorRepositoryTest {
         }
     }
 
+    @Test
+    public void testUpdateYearOfBirthByName() {
+        actorRepository.updateYearOfBirthByName("吴京", 2000);
+    }
+
 }

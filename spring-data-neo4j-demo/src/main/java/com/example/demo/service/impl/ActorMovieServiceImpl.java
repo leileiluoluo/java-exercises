@@ -5,6 +5,7 @@ import com.example.demo.model.Movie;
 import com.example.demo.repository.ActorRepository;
 import com.example.demo.repository.MovieRepository;
 import com.example.demo.service.ActorMovieService;
+import jakarta.transaction.Transactional;
 import org.neo4j.cypherdsl.core.Condition;
 import org.neo4j.cypherdsl.core.Cypher;
 import org.neo4j.cypherdsl.core.Node;
@@ -12,6 +13,7 @@ import org.neo4j.cypherdsl.core.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.neo4j.core.Neo4jTemplate;
 import org.springframework.stereotype.Service;
 
@@ -57,15 +59,29 @@ public class ActorMovieServiceImpl implements ActorMovieService {
     }
 
     @Override
-    public List<Actor> queryByExample() {
+    public List<Actor> findActorsByNamePrefixWithQueryByExample(String prefix) {
         Actor exampleActor = new Actor();
-        exampleActor.setName("京");
+        exampleActor.setName(prefix);
 
         ExampleMatcher matcher = ExampleMatcher.matching()
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
-                .withIgnorePaths("id");
+                .withIgnorePaths("yearOfBirth")
+                .withStringMatcher(ExampleMatcher.StringMatcher.STARTING);
 
-        return actorRepository.findAll(Example.of(exampleActor, matcher));
+        return actorRepository.findAll(Example.of(exampleActor, matcher), Sort.by("yearOfBirth").descending());
+    }
+
+    @Transactional
+    @Override
+    public void updateMovie(Movie movie) {
+        movieRepository.findById(movie.getId())
+                .map(m -> {
+                    m.setName(movie.getName());
+                    if (movie.getReleasedAt() > 0) {
+                        m.setReleasedAt(movie.getReleasedAt());
+                    }
+                    return movieRepository.save(m);
+                })
+                .orElseThrow(() -> new RuntimeException("Movie not found"));
     }
 
 }

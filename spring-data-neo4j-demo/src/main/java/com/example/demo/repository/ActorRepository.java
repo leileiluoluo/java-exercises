@@ -33,4 +33,11 @@ public interface ActorRepository
             """)
     List<Path> findShortestPathBetweenActors(String actor1, String actor2);
 
+    @Query("""
+            MATCH (a:Actor)
+            WHERE a.name = $name
+            SET a.yearOfBirth = $yearOfBirth
+            """)
+    void updateYearOfBirthByName(String name, int yearOfBirth);
+
 }

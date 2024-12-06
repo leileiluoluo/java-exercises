@@ -11,6 +11,8 @@ public interface ActorMovieService {
 
     List<Actor> findActorsByNamePrefix(String prefix);
 
-    List<Actor> queryByExample();
+    List<Actor> findActorsByNamePrefixWithQueryByExample(String prefix);
+
+    void updateMovie(Movie movie);
 
 }
