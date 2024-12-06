@@ -12,5 +12,4 @@ public class CypherDSLConfig {
         return Configuration.newConfig()
                 .withDialect(Dialect.NEO4J_5).build();
     }
-
 }

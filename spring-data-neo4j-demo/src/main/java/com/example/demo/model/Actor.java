@@ -24,5 +24,4 @@ public class Actor {
         this.nationality = nationality;
         this.yearOfBirth = yearOfBirth;
     }
-
 }

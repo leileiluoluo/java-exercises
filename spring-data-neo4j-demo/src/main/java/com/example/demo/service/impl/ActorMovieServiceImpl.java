@@ -5,7 +5,10 @@ import com.example.demo.model.Movie;
 import com.example.demo.repository.ActorRepository;
 import com.example.demo.repository.MovieRepository;
 import com.example.demo.service.ActorMovieService;
-import org.neo4j.cypherdsl.core.*;
+import org.neo4j.cypherdsl.core.Condition;
+import org.neo4j.cypherdsl.core.Cypher;
+import org.neo4j.cypherdsl.core.Node;
+import org.neo4j.cypherdsl.core.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -36,7 +39,7 @@ public class ActorMovieServiceImpl implements ActorMovieService {
                 """;
 
         Map<String, Object> params = new HashMap<>();
-        params.put("name", "吴京");
+        params.put("name", name);
 
         return neo4jTemplate.findAll(cypher, params, Movie.class);
     }

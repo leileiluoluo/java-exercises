@@ -26,4 +26,10 @@ public class ActorMovieServiceTest {
         System.out.println(actors);
     }
 
+    @Test
+    public void testQueryByExample() {
+        List<Actor> actors = actorMovieService.queryByExample();
+        System.out.println(actors);
+    }
+
 }

@@ -29,5 +29,4 @@ public class Movie {
         this.releasedAt = releasedAt;
         this.rolesAndActors = rolesAndActors;
     }
-
 }
