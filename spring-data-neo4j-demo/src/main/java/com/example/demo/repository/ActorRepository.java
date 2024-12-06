@@ -8,7 +8,8 @@ import org.springframework.data.neo4j.repository.support.CypherdslConditionExecu
 
 import java.util.List;
 
-public interface ActorRepository extends Neo4jRepository<Actor, Long>, CypherdslConditionExecutor<Actor> {
+public interface ActorRepository
+        extends Neo4jRepository<Actor, Long>, CypherdslConditionExecutor<Actor> {
 
     @Query("""
             MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)

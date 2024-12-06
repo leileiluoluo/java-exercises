@@ -7,7 +7,8 @@ import org.springframework.data.neo4j.repository.support.CypherdslConditionExecu
 
 import java.util.List;
 
-public interface MovieRepository extends Neo4jRepository<Movie, Long>, CypherdslConditionExecutor<Movie> {
+public interface MovieRepository
+        extends Neo4jRepository<Movie, Long>, CypherdslConditionExecutor<Movie> {
 
     List<Movie> findByName(String name);
 
