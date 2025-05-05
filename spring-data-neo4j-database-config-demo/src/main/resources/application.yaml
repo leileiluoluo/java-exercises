@@ -1,4 +1,7 @@
 spring:
+  data:
+    neo4j:
+      database: test
   neo4j:
     uri: bolt://localhost:7687
     authentication:
