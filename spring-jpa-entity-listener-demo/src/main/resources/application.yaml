@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:mysql://boyouquan.com:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
     username: test
-    password: Happy.2017!
+    password: test
   jpa:
     show-sql: true
