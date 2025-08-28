@@ -3,6 +3,7 @@ package com.example.demo.mapper;
 import com.example.demo.dto.UserDto;
 import com.example.demo.util.DateTimeUtil;
 import com.example.demo.vo.User;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -10,16 +11,20 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.Calendar;
 
-@Mapper(uses = DateTimeUtil.class)
+@Mapper(uses = DateTimeUtil.class, componentModel = "spring")
 public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    @Mapping(source = "name", target = "username")
+    @Mapping(source = "name", target = "username", defaultValue = "Unknown")
     @Mapping(source = "yearOfBirth", target = "age", qualifiedByName = "calculateAge")
     @Mapping(target = "newCenturyUser", expression = "java(user.getYearOfBirth() >= 2000)")
+    @Mapping(target = "level", constant = "PRIMARY")
     @Mapping(source = "createdAt", target = "createdDate")
     UserDto toUserDto(User user);
+
+    @InheritInverseConfiguration
+    User toUser(UserDto userDto);
 
     @Named("calculateAge")
     default Integer calculateAge(Integer yearOfBirth) {

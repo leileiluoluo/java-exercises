@@ -13,6 +13,7 @@ public class UserDto {
     private Integer age;
     private Boolean newCenturyUser;
     private String role;
+    private String level;
     private LocalDateTime createdDate;
 
 }
